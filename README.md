@@ -1,7 +1,7 @@
 # YouTube Downloader
 Versão atual: 0.1.0
 
-### Depenências: 
+### Dependências: 
 
 - Para uso em CLI: **Pytube**
 
