@@ -23,7 +23,7 @@ Por outro lado, as aplicações que utilizam CLI, estão bem mais avançadas,
 completas e estáveis. Recomendo fortemente que utilize-as, no lugar das 
 com interface gráfica. 
 
-### Referêncas:
+### Referências:
 🔗Link para o repositório original do **Pytube**: 
 https://github.com/pytube/pytube
 
