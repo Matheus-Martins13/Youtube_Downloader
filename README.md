@@ -7,7 +7,9 @@ Versão atual: 0.1.0
 
 - Para uso em GUI: **Pytube** e **PySimpleGUI**
 
-📝 ### Descrição:
+
+### Descrição:
+📝 
 
 Seja bem vindo ao meu projeto 'YouTube Donwloader', que tem por objetivo 
 baxar vídeos, playlists de vídeos, áudios e playlists de áudios do YouTube.
