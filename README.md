@@ -1,13 +1,13 @@
 # YouTube Downloader
 Versão atual: 0.1.0
 
-Depenências: 
+### Depenências: 
 
-Para uso em CLI: **Pytube**
+- Para uso em CLI: **Pytube**
 
-Para uso em GUI: **Pytube** e **PySimpleGUI**
+- Para uso em GUI: **Pytube** e **PySimpleGUI**
 
-📝
+📝 ### Descrição:
 
 Seja bem vindo ao meu projeto 'YouTube Donwloader', que tem por objetivo 
 baxar vídeos, playlists de vídeos, áudios e playlists de áudios do YouTube.
@@ -21,6 +21,7 @@ Por outro lado, as aplicações que utilizam CLI, estão bem mais avançadas,
 completas e estáveis. Recomendo fortemente que utilize-as, no lugar das 
 com interface gráfica. 
 
+### Referêncas:
 🔗Link para o repositório original do **Pytube**: 
 https://github.com/pytube/pytube
 
