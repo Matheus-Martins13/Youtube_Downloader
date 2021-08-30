@@ -1,5 +1,5 @@
 # YouTube Downloader
-Versão atual: 0.1.0
+Versão atual: 0.1.1
 
 ### Dependências: 
 
@@ -23,9 +23,13 @@ Por outro lado, as aplicações que utilizam CLI, estão bem mais avançadas,
 completas e estáveis. Recomendo fortemente que utilize-as, no lugar das 
 com interface gráfica. 
 
+Atualizações (somente em CLI):
+- Correções de erro;
+- Maior precisão na utilização das aplicações.
+
 ### Referências:
-🔗Link para o repositório original do **Pytube**: 
+🔗Link para o repositório original do **Pytube**:
 https://github.com/pytube/pytube
 
-🔗 Link para o repositório original do **PySimpleGUI**:
+🔗 Link para o repositório original do **PySimpleGUI**: 
 https://github.com/PySimpleGUI/PySimpleGUI
