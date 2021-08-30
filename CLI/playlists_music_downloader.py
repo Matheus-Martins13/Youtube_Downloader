@@ -3,32 +3,46 @@ Aplicação com o objetivo de fazer o download de playlists do youtube em format
 """
 
 # importando as dependências
-from pytube import Playlist
-from pytube import YouTube
+from pytube import (
+    Playlist,
+    YouTube
+)
+from pytube.exceptions import RegexMatchError
 import os
 
-# url da playlist
-p = Playlist(str(input('Entre com o link da playlist \n>> ')))
+# url da playlist e verificando validade
+p = Playlist(input('Entre com o link da playlist \n>> '))
 
-# checando o diretório
-diretorio = str(input("Entre com o diretório para salvar suas músicas: "))
+try:
+    verificacao = [url for url in p.video_urls]
 
-# Procesando as URLs
-for url in p.video_urls[:len([url for url in p.video_urls])]:
-    yt = YouTube(str(url))
+except KeyError:
+    print('\nOcorreu um erro ao acessar a playlist. Por favor, certifique-se de estar colocando '
+          'um link válido de uma playlist do YouTube.')
 
-    # extraindo o audio
-    video = yt.streams.filter(only_audio=True).first()
+else:
+    # Informações da playlist:
+    print(f'Nome: "{p.title}"')
+    print(f'Tamanho: {len([url2 for url2 in p.video_urls])} vídeos')
 
-    # baixando o arquivo
-    out_file = video.download(output_path=diretorio)
+    # recebendo o diretório
+    diretorio = input("\nEntre com o diretório para salvar suas músicas \n>> ")
 
-    # salvando o arquivo
-    base, ext = os.path.splitext(out_file)
-    new_file = base + '.mp3'
-    os.rename(out_file, new_file)
+    # separando as urls
+    for url in p.video_urls[:len([url2 for url2 in p.video_urls])]:
+        try:
+            yt = YouTube(str(url))
+        except RegexMatchError:
+            print(f'O link de um dos vídeos da playlist "{p.title}" é inválido.')
+        else:
+            # separando só o áudio
+            video = yt.streams.filter(only_audio=True).first()
+            out_file = video.download(output_path=diretorio)
 
-    # Apresentando mensagem de êxito
-    print(yt.title + " Foi baixado com sucesso! \n")
+            # salvando o arquivo
+            base, ext = os.path.splitext(out_file)
+            new_file = base + '.mp3'
+            os.rename(out_file, new_file)
 
-print('Todas as músicas foram baixados com sucesso!')
+            # Apresentando mensagem de êxito
+            print(yt.title + " Foi baixado com sucesso! \n")

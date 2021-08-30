@@ -4,25 +4,30 @@ Aplicação com o objetivo de fazer o download de aúdios do youtube em formato 
 
 # Importando as dependências
 from pytube import YouTube
+from pytube.exceptions import RegexMatchError
 import os
 
-#
-yt = YouTube(str(input("Entre com o link do vídeo \n>> ")))
+# pedindo o link do vídeo
+try:
+    yt = YouTube(input("Entre com o link do vídeo \n>> "))
+except RegexMatchError:
+    print("\nLink inválido. Experimente copiar o link de um vídeo do YouTube!")
 
-# extraindo o áudio
-video = yt.streams.filter(only_audio=True).first()
+else:
+    # extraindo o áudio
+    video = yt.streams.filter(only_audio=True).first()
 
-# coletando o diretório
-print("Entre com o diretório onde deseja salvar a música.")
-destination = str(input(">> ")) or '.'
+    # salvando o diretório
+    print("Entre com o diretório onde deseja salvar a música.")
+    destination = str(input(">> ")) or '.'
 
-# iniciando o processo de download
-out_file = video.download(output_path=destination)
+    # iniciando o processo de download
+    out_file = video.download(output_path=destination)
 
-# salvando o arquivo
-base, ext = os.path.splitext(out_file)
-new_file = base + '.mp3'
-os.rename(out_file, new_file)
+    # salvando o arquivo
+    base, ext = os.path.splitext(out_file)
+    new_file = base + '.mp3'
+    os.rename(out_file, new_file)
 
-# Apresentando mensagem de êxito
-print(f"'{yt.title}'" + " Foi baixado com sucesso!")
+    # Apresentando mensagem de êxito
+    print(f"'{yt.title}'" + " Foi baixado com sucesso!")
