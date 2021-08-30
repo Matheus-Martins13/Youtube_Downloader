@@ -4,36 +4,51 @@ O download será feito na maior qualidade disponível.
 """
 
 # importando as dependências
-from pytube import Playlist
-from pytube import YouTube
+from pytube import (
+    YouTube,
+    Playlist
+)
+from pytube.exceptions import RegexMatchError
 
 # url da playlist
 p = Playlist(str(input('Entre com o link da playlist \n>> ')))
+try:
+    verificacao = [url for url in p.video_urls]
 
-# checando o diretório
-diretorio = str(input("Entre com o diretório para salvar sua playlist \n>> "))
+except KeyError:
+    print('\nOcorreu um erro ao acessar a playlist. Por favor, certifique-se de estar colocando '
+          'um link válido de uma playlist do YouTube.')
 
-for url in p.video_urls[:len([url for url in p.video_urls])]:
-    yt = YouTube(str(url))
+else:
+    # Informações da playlist:
+    print(f'Nome: "{p.title}"')
+    print(f'Tamanho: {len([url2 for url2 in p.video_urls])} vídeos')
 
-    # informações do vídeo:
-    print('Título do vídeo: ', yt.title)
-    tamanho = float(yt.length)
+    # recebendo o diretório
+    diretorio = input("\nEntre com o diretório para salvar suas músicas \n>> ")
 
-    # Convertendo o tamanho:
-    if yt.length < 60.00:
-        print('Tamanho do vídeo: ', yt.length, 'segundos')
-    else:
-        minutos = yt.length / 60.00
-        min_form = round(minutos, 2)
-        print('Duração do vídeo: ', min_form, 'minutos')
+    for url in p.video_urls[:len([url for url in p.video_urls])]:
+        try:
+            yt = YouTube(str(url))
+        except RegexMatchError:
+            print(f'O link de um dos vídeos da playlist "{p.title}" é inválido.')
+        else:
+            # informações do vídeo:
+            print('Título do vídeo: ', yt.title)
+            tamanho = float(yt.length)
 
-    # maior resolução:
-    ys = yt.streams.get_highest_resolution()
+            # convertendo o tamanho:
+            if yt.length < 60.00:
+                print('Tamanho do vídeo: ', yt.length, 'segundos')
+            else:
+                minutos = yt.length / 60.00
+                min_form = round(minutos, 2)
+                print('Duração do vídeo: ', min_form, 'minutos')
 
-    # download:
-    print('Baixando...')
-    ys.download(diretorio)
-    print(yt.title, 'Baixado com sucesso. \n--------')
+            # maior resolução:
+            ys = yt.streams.get_highest_resolution()
 
-print('Todos os vídeos foram baixados com sucesso!')
+            # download:
+            print('Baixando...')
+            ys.download(diretorio)
+            print(yt.title, ' - Baixado com sucesso. \n--------')
